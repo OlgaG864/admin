@@ -5,6 +5,10 @@ function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  function submit() {
+    // todo: replace with an API call to server
+    console.log("submit data");
+  }
   return (
     <>
       <h2>Sign Up</h2>
