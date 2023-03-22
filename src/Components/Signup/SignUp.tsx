@@ -7,23 +7,54 @@ function SignUp() {
 
   function submit() {
     // todo: replace with an API call to server
-    console.log("submit data");
+    const data = {
+      name,
+      email,
+      password,
+    };
+
+    fetch("http://localhost:3000/users/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }).then((res) => {
+      console.log("registered");
+    });
   }
   return (
     <>
       <h2>Sign Up</h2>
 
       <div>
-        <input type="text" placeholder="Name" />
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
       </div>
       <div>
-        <input type="text" placeholder="Email" />
+        <input
+          type="text"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </div>
       <div>
-        <input type="password" placeholder="Password" />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
       </div>
 
-      <button className="btn btn-primary">Sign Up</button>
+      <button className="btn btn-primary" onClick={submit}>
+        Sign Up
+      </button>
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Customer {
   id: string;
@@ -8,16 +8,36 @@ interface Customer {
 }
 
 function Customers() {
-  const data: Array<Customer> = [
+  /* const data: Array<Customer> = [
     {
       id: "1",
       name: "bob",
       city: "Netanya",
       phone: "03-5550000",
     },
-  ];
+  ];*/
 
-  const [customers, setCustomers] = useState(data);
+  const [customers, setCustomers] = useState<Array<Customer>>([]);
+
+  function getCustomers() {
+    const token = localStorage.getItem("token");
+    if (!token || token.length === 0) {
+      return;
+    }
+
+    fetch("http://localhost:3000/customers", {
+      method: "GET",
+      headers: {
+        "x-auth-token": token,
+      },
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        setCustomers(json);
+      });
+  }
+
+  useEffect(getCustomers, []);
 
   return (
     <>

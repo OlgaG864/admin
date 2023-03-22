@@ -4,8 +4,22 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   function submit() {
-    // todo: replace with an API call to server
-    console.log("submit data");
+    const data = {
+      email,
+      password,
+    };
+
+    fetch("http://localhost:3000/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        localStorage.setItem("token", json.token);
+      });
   }
   return (
     <>

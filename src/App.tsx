@@ -3,6 +3,7 @@ import Customers from "./Components/Customers/Customers";
 import { Routes, Route, Link } from "react-router-dom";
 import Login from "./Components/Login/Login";
 import SignUp from "./Components/Signup/SignUp";
+import LogOut from "./Components/Logout/Logout";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Link to="/signup" className="btn btn-info m-2">
           Signup
         </Link>
+        <LogOut></LogOut>
       </div>
       <Routes>
         <Route path="/" element={<Customers />}></Route>
